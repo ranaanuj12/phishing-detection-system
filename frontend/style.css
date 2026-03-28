@@ -1,0 +1,332 @@
+/* =========================================================
+   style.css  –  PhishGuard Phishing Detector
+   Theme: Dark industrial / terminal aesthetic
+   Fonts: Syne (display) + DM Mono
+   ========================================================= */
+
+/* ---------- CSS Variables (Design Tokens) ---------- */
+:root {
+  --bg-dark:       #0d0f14;   /* main background */
+  --bg-card:       #13161e;   /* card background  */
+  --bg-input:      #1a1e29;   /* input background */
+  --border-subtle: #2a2f3e;   /* subtle borders   */
+  --accent-green:  #00e5a0;   /* safe / positive  */
+  --accent-red:    #ff4d6d;   /* phishing / danger*/
+  --accent-yellow: #ffd166;   /* warning / neutral*/
+  --text-primary:  #e8eaf0;   /* main text        */
+  --text-muted:    #6b7385;   /* muted text       */
+  --font-display:  'Syne',    sans-serif;
+  --font-mono:     'DM Mono', monospace;
+  --radius:        12px;
+  --transition:    0.25s ease;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* subtle grid texture on background */
+  background-image:
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ---------- Header ---------- */
+.header {
+  text-align: center;
+  padding: 48px 20px 16px;
+  animation: fadeDown 0.6s ease both;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.logo-icon { font-size: 2rem; }
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--accent-green);
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Main Layout ---------- */
+.main-container {
+  flex: 1;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* decorative top bar on card */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-green), #00bcd4);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.card-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+/* ---------- Input Group ---------- */
+.input-group { margin-bottom: 20px; }
+
+.input-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.input-box {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  resize: vertical;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.input-box:focus {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.12);
+}
+
+.input-box::placeholder { color: var(--text-muted); }
+
+/* ---------- Check Button ---------- */
+.check-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent-green);
+  color: #0d0f14;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+.check-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 229, 160, 0.35);
+}
+
+.check-btn:active { transform: translateY(0); }
+.check-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* ---------- Loader Spinner ---------- */
+.loader {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(13,15,20,0.4);
+  border-top-color: #0d0f14;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ---------- Result Box ---------- */
+.result-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Safe state */
+.result-box.safe {
+  background: rgba(0, 229, 160, 0.08);
+  border-color: var(--accent-green);
+}
+
+/* Phishing state */
+.result-box.phishing {
+  background: rgba(255, 77, 109, 0.08);
+  border-color: var(--accent-red);
+}
+
+.result-icon { font-size: 2.2rem; line-height: 1; }
+
+.result-label {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.result-box.safe     .result-label { color: var(--accent-green); }
+.result-box.phishing .result-label { color: var(--accent-red);   }
+
+.result-desc {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Error Message ---------- */
+.error-msg {
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-yellow);
+  text-align: center;
+}
+
+/* ---------- How It Works ---------- */
+.how-it-works {
+  margin-top: 40px;
+}
+
+.how-it-works h2 {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.step {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 16px 14px;
+  max-width: 120px;
+  text-align: center;
+  flex: 1;
+  min-width: 90px;
+}
+
+.step-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-green);
+  margin-bottom: 8px;
+  letter-spacing: 0.08em;
+}
+
+.step p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.arrow {
+  color: var(--border-subtle);
+  font-size: 1.2rem;
+  padding-top: 18px;
+  flex-shrink: 0;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ---------- Utility: Hidden ---------- */
+.hidden { display: none !important; }
+
+/* ---------- Keyframes ---------- */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .card { padding: 24px 18px; }
+  .arrow { display: none; }
+  .steps { gap: 10px; }
+  .step  { max-width: 48%; }
+}

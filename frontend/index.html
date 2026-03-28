@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PhishGuard – Phishing Detector</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">🛡</span>
+      <span class="logo-text">PhishGuard</span>
+    </div>
+    <p class="tagline">Real-time phishing detection powered by ML</p>
+  </header>
+
+  <!-- MAIN CARD -->
+  <main class="main-container">
+    <div class="card">
+
+      <h1 class="card-title">Check a URL or Text</h1>
+      <p class="card-subtitle">
+        Paste any suspicious link or text below and let our AI decide if it's safe.
+      </p>
+
+      <!-- Input Area -->
+      <div class="input-group">
+        <label for="urlInput" class="input-label">URL or Text</label>
+        <textarea
+          id="urlInput"
+          class="input-box"
+          rows="3"
+          placeholder="e.g. http://paypa1-secure-login.com/verify"
+        ></textarea>
+      </div>
+
+      <!-- Check Button -->
+      <button id="checkBtn" class="check-btn" onclick="checkInput()">
+        <span id="btnText">Check Now</span>
+        <span id="btnLoader" class="loader hidden"></span>
+      </button>
+
+      <!-- Result Box -->
+      <div id="resultBox" class="result-box hidden">
+        <div id="resultIcon" class="result-icon"></div>
+        <div class="result-text-group">
+          <p id="resultLabel" class="result-label"></p>
+          <p id="resultDesc"  class="result-desc"></p>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <p id="errorMsg" class="error-msg hidden"></p>
+
+    </div>
+
+    <!-- How it works -->
+    <div class="how-it-works">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <p>You enter a URL or suspicious text</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <p>Java backend forwards it to the ML engine</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <p>Python ML model predicts Safe or Phishing</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <p>Result is shown instantly here</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>PhishGuard · Frontend → Java → Python ML</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
